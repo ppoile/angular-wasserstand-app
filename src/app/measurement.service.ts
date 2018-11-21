@@ -8,7 +8,9 @@ import { delay, mapTo } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class MeasurementService {
-  url = "https://www.hydrodaten.admin.ch/de/2082.html";
+  // https://www.hydrodaten.admin.ch/de/2082.html
+  url = "/hydrodaten-api/2082.html";
+  // url = '/assets/2082.html';
 
   constructor(private http: HttpClient) { }
 

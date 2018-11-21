@@ -1,0 +1,11 @@
+{
+    "/hydrodaten-api": {
+        "target": "https://www.hydrodaten.admin.ch/de/",
+        "secure": false,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/hydrodaten-api/": ""
+        },
+        "changeOrigin": true
+    }
+}
