@@ -13,15 +13,19 @@ export class AppComponent {
   measurement = "(unknown)";
 
   constructor(private measurementService: MeasurementService) {
-    this.subscribeMeasurement();
     console.log(`measurement: ${this.measurement}`);
+    this.subscribeMeasurement();
   }
 
   subscribeMeasurement(): void {
+    const observer = {
+      next: (measurement) => {
+        this.measurement = measurement.toString();
+      },
+      error: (err) => console.error('Observer: got an error: ' + err),
+      complete: () => console.log('Observer: got complete notification'),
+    };
     const observable = this.measurementService.getObservable();
-    observable.subscribe(measurement => {
-      console.log(`measurement: ${measurement}`);
-      this.measurement = measurement.toString();
-    });
+    observable.subscribe(observer);
   }
 }

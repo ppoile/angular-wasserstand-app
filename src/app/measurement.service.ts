@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
-import { delay, mapTo } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import * as $ from 'jquery';
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +15,18 @@ export class MeasurementService {
 
   constructor(private http: HttpClient) { }
 
-  getObservable() {
-    var observable = this.http.get(this.url, {responseType: 'text'})
-    observable.subscribe(
-      (data) => { console.log(`data: ${data}`); },
-      error => { console.log(`error: ${error}`); },
-    );
-    return this.getObservable2();
+  getObservable(): Observable<number> {
+    const htmlObservable = this.http.get(this.url, {responseType: 'text'});
+    return this.measurementFromHtmlObservable(htmlObservable);
   }
 
-  getObservable2() {
-    const dummy = of(null);
-    return dummy.pipe(
-      mapTo(434.77),
-      delay(1000));
-  }
+  measurementFromHtmlObservable = map(
+    (html: string) => this.getMeasurementFromHtml(html));
+
+  getMeasurementFromHtml(html: string) {
+    console.log(`html: ${html}`);
+    var measurement = +$('td', $.parseHTML(html)).first().text();
+    console.log(`measurement: ${measurement}`);
+    return measurement;
+  };
 }
