@@ -10,6 +10,7 @@ import { MeasurementService } from './measurement.service';
 })
 export class AppComponent {
   title = 'wasserstand-app';
+  referenceLevel = 438;
   measurement = '(unknown)';
   updateMeasurementTimeoutInMinutes = 5;
   milliSecondsPerMinute = 60 * 1000;
