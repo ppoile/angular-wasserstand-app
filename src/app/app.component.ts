@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, timer } from 'rxjs';
 import { MeasurementService } from './measurement.service';
 
 @Component({
@@ -11,10 +11,11 @@ import { MeasurementService } from './measurement.service';
 export class AppComponent {
   title = 'wasserstand-app';
   measurement = "(unknown)";
+  updateMeasurementTimeoutInMilliseconds = 5000;
 
   constructor(private measurementService: MeasurementService) {
     console.log(`measurement: ${this.measurement}`);
-    this.subscribeMeasurement();
+    this.setupTimer();
   }
 
   subscribeMeasurement(): void {
@@ -27,5 +28,18 @@ export class AppComponent {
     };
     const observable = this.measurementService.getObservable();
     observable.subscribe(observer);
+  }
+
+  setupTimer(): void {
+    const updateTimer = timer(0, this.updateMeasurementTimeoutInMilliseconds);
+    updateTimer.subscribe(timeoutCounter => {
+      console.log(`timeout...(counter=${timeoutCounter})`);
+      this.subscribeMeasurement();
+    });
+  }
+
+  onUpdateMeasurement(): void {
+    console.log('update...');
+    this.subscribeMeasurement();
   }
 }
