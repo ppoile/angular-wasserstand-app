@@ -22,8 +22,8 @@ export class MeasurementService {
 
   getMeasurementFromHtml(html: string) {
     console.log(`html: ${html}`);
-    var measurement = +$('td', $.parseHTML(html)).first().text();
+    const measurement = +$('td', $.parseHTML(html)).first().text();
     console.log(`measurement: ${measurement}`);
     return measurement;
-  };
+  }
 }

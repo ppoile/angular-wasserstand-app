@@ -10,7 +10,7 @@ import { MeasurementService } from './measurement.service';
 })
 export class AppComponent {
   title = 'wasserstand-app';
-  measurement = "(unknown)";
+  measurement = '(unknown)';
   updateMeasurementTimeoutInMilliseconds = 5000;
 
   constructor(private measurementService: MeasurementService) {
