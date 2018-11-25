@@ -16,12 +16,9 @@ export class MeasurementService {
   constructor(private http: HttpClient) { }
 
   getObservable(): Observable<number> {
-    const htmlObservable = this.http.get(this.url, {responseType: 'text'});
-    return this.measurementFromHtmlObservable(htmlObservable);
+    return this.http.get(this.url, {responseType: 'text'})
+      .pipe(map((html: string) => this.getMeasurementFromHtml(html)));
   }
-
-  measurementFromHtmlObservable = map(
-    (html: string) => this.getMeasurementFromHtml(html));
 
   getMeasurementFromHtml(html: string) {
     console.log(`html: ${html}`);
