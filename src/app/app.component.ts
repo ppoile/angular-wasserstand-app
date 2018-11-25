@@ -11,7 +11,8 @@ import { MeasurementService } from './measurement.service';
 export class AppComponent {
   title = 'wasserstand-app';
   measurement = '(unknown)';
-  updateMeasurementTimeoutInMilliseconds = 5000;
+  updateMeasurementTimeoutInMinutes = 5;
+  milliSecondsPerMinute = 60 * 1000;
 
   constructor(private measurementService: MeasurementService) {
     console.log(`measurement: ${this.measurement}`);
@@ -31,7 +32,8 @@ export class AppComponent {
   }
 
   setupTimer(): void {
-    const updateTimer = timer(0, this.updateMeasurementTimeoutInMilliseconds);
+    const timeoutInMilliseconds = this.updateMeasurementTimeoutInMinutes * this.milliSecondsPerMinute;
+    const updateTimer = timer(0, timeoutInMilliseconds);
     updateTimer.subscribe(timeoutCounter => {
       console.log(`timeout...(counter=${timeoutCounter})`);
       this.subscribeMeasurement();
