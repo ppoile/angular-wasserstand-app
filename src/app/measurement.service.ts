@@ -9,20 +9,20 @@ import * as $ from 'jquery';
   providedIn: 'root'
 })
 export class MeasurementService {
-  // https://www.hydrodaten.admin.ch/de/2082.html
-  // url = "/hydrodaten-api/2082.html";
-  url = '/assets/2082.html';
+  // https://swisshydroapi.bouni.de/api/v1/station/2082/parameters/level
+  url = "/hydrodaten-api/2082/parameters/level";
+  // url = '/assets/2082.html';
 
   constructor(private http: HttpClient) { }
 
   getObservable(): Observable<number> {
-    return this.http.get(this.url, {responseType: 'text'})
-      .pipe(map((html: string) => this.getMeasurementFromHtml(html)));
+    return this.http.get(this.url)
+      .pipe(map((json) => this.getMeasurementFromJson(json)));
   }
 
-  getMeasurementFromHtml(html: string) {
-    console.log(`html: ${html}`);
-    const measurement = +$('td', $.parseHTML(html)).first().text();
+  getMeasurementFromJson(json) {
+    console.log(`json: ${json}`);
+    const measurement = +json['value'];
     console.log(`measurement: ${measurement}`);
     return measurement;
   }

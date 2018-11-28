@@ -1,6 +1,6 @@
 {
     "/hydrodaten-api": {
-        "target": "https://www.hydrodaten.admin.ch/de/",
+        "target": "https://swisshydroapi.bouni.de/api/v1/station/",
         "secure": false,
         "logLevel": "debug",
         "pathRewrite": {
