@@ -10,8 +10,8 @@ import * as $ from 'jquery';
 })
 export class MeasurementService {
   // https://swisshydroapi.bouni.de/api/v1/station/2082/parameters/level
-  url = "/hydrodaten-api/2082/parameters/level";
-  // url = '/assets/2082.html';
+  // url = "/hydrodaten-api/2082/parameters/level";
+  url = '/assets/2082-parameters-level.json';
 
   constructor(private http: HttpClient) { }
 
