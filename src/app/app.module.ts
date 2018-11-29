@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material';
 import { MatCheckboxModule } from '@angular/material';
+import { MatChipsModule } from '@angular/material/chips';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
@@ -17,6 +18,7 @@ import { AppComponent } from './app.component';
     HttpClientModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatChipsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
